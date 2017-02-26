@@ -38,28 +38,28 @@ namespace RicksGuitarsStart.Model
         /// </summary>
         public void Initialize()
         {
-            Add(new Guitar("11277", 3999.95m, Builder.Collings, "CJ", Category.Acoustic,
-                                Wood.IndianRosewood, Wood.Sitka));
-            Add(new Guitar("V95693", 1499.95m, Builder.Fender, "Stratocastor", Category.Electric,
-                                Wood.Alder, Wood.Alder));
-            Add(new Guitar("V9512", 1549.95m, Builder.Fender, "Stratocastor", Category.Electric,
-                                Wood.Alder, Wood.Alder));
-            Add(new Guitar("122784", 5495.95m, Builder.Martin, "D-18", Category.Acoustic,
-                                Wood.Mahogany, Wood.Adirondack));
-            Add(new Guitar("76531", 6295.95m, Builder.Martin, "OM-28", Category.Acoustic,
-                                Wood.BrazilianRosewood, Wood.Adirondack));
-            Add(new Guitar("70108276", 2295.95m, Builder.Gibson, "Les Paul", Category.Electric,
-                                Wood.Mahogany, Wood.Maple));
-            Add(new Guitar("82765501", 1890.95m, Builder.Gibson, "SG '61 Reissue",
-                                Category.Electric, Wood.Mahogany, Wood.Mahogany));
-            Add(new Guitar("77023", 6275.95m, Builder.Martin, "D-28", Category.Acoustic,
-                                Wood.BrazilianRosewood, Wood.Adirondack));
-            Add(new Guitar("1092", 12995.95m, Builder.Olson, "SJ", Category.Acoustic,
-                                Wood.IndianRosewood, Wood.Cedar));
-            Add(new Guitar("566-62", 8999.95m, Builder.Ryan, "Cathedral", Category.Acoustic,
-                                Wood.Cocobolo, Wood.Cedar));
-            Add(new Guitar("6 29584", 2100.95m, Builder.PRS, "Dave Navarro Signature",
-                                Category.Electric, Wood.Mahogany, Wood.Maple));
+            Add(new Guitar("11277", 3999.95m, new GuitarSpecification(Builder.Collings, "CJ", Category.Acoustic, 6, 
+                                Wood.IndianRosewood, Wood.Sitka)));
+            Add(new Guitar("V95693", 1499.95m, new GuitarSpecification(Builder.Fender, "Stratocastor", Category.Electric, 12, 
+                                Wood.Alder, Wood.Alder)));
+            Add(new Guitar("V9512", 1549.95m, new GuitarSpecification(Builder.Fender, "Stratocastor", Category.Electric, 6, 
+                                Wood.Alder, Wood.Alder)));
+            Add(new Guitar("122784", 5495.95m, new GuitarSpecification(Builder.Martin, "D-18", Category.Acoustic, 6, 
+                                Wood.Mahogany, Wood.Adirondack)));
+            Add(new Guitar("76531", 295.95m, new GuitarSpecification(Builder.Martin, "OM-28", Category.Acoustic, 6, 
+                                Wood.BrazilianRosewood, Wood.Adirondack)));
+            Add(new Guitar("70108276", 2295.95m, new GuitarSpecification(Builder.Gibson, "Les Paul", Category.Electric, 6,
+                                Wood.Mahogany, Wood.Maple)));
+            Add(new Guitar("82765501", 1890.95m, new GuitarSpecification(Builder.Gibson, "SG '61 Reissue",
+                                Category.Electric, 6, Wood.Mahogany, Wood.Mahogany)));
+            Add(new Guitar("77023", 275.95m, new GuitarSpecification(Builder.Martin, "D-28", Category.Acoustic, 6,
+                                Wood.BrazilianRosewood, Wood.Adirondack)));
+            Add(new Guitar("1092", 12995.95m, new GuitarSpecification(Builder.Olson, "SJ", Category.Acoustic, 6,
+                                Wood.IndianRosewood, Wood.Cedar)));
+            Add(new Guitar("566-62", 8999.95m, new GuitarSpecification(Builder.Ryan, "Cathedral", Category.Acoustic, 6,
+                                Wood.Cocobolo, Wood.Cedar)));
+            Add(new Guitar("6 29584", 2100.95m, new GuitarSpecification(Builder.PRS, "Dave Navarro Signature",
+                                Category.Electric, 6, Wood.Mahogany, Wood.Maple)));
         }
 
         /// <summary>
@@ -92,6 +92,8 @@ namespace RicksGuitarsStart.Model
                 if (!string.IsNullOrEmpty(guitar.Specification.Model) && searchGuitarSpecification.Model != guitar.Specification.Model)
                     continue;
                 if (searchGuitarSpecification.Category != guitar.Specification.Category)
+                    continue;
+                if (searchGuitarSpecification.NumberOfStrings != guitar.Specification.NumberOfStrings)
                     continue;
                 if (searchGuitarSpecification.TopWood != guitar.Specification.TopWood)
                     continue;

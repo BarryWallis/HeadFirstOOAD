@@ -28,7 +28,6 @@ namespace RicksGuitarsStart
             InitializeComponent();
 
             DataContext = mainWindowViewModel;
-            ModelComboBox.SelectedIndex = 0;
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e) => mainWindowViewModel.Search();

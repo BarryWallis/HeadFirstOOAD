@@ -84,6 +84,17 @@ namespace RicksGuitarsStart.ViewModel
                 NotifyPropertyChanged();
             }
         }
+
+        private int _numberOfStrings = 6;
+        public int NumberOfStrings
+        {
+            get { return _numberOfStrings; }
+            set
+            {
+                _numberOfStrings = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         public MainWIndowViewModel()
@@ -93,6 +104,7 @@ namespace RicksGuitarsStart.ViewModel
             ResultsTextBox = " ";
             inventory.Initialize();
             _models = new ObservableCollection<string>(inventory.Models);
+            _modelComboBoxItem = _models[0];
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -110,7 +122,7 @@ namespace RicksGuitarsStart.ViewModel
         /// </summary>
         internal void Search()
         {
-            GuitarSpecification searchGuitarSpecification = new GuitarSpecification((Builder)BuilderComboBoxIndex, ModelComboBoxItem, (Category)CategoryComboBoxIndex, (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex);
+            GuitarSpecification searchGuitarSpecification = new GuitarSpecification((Builder)BuilderComboBoxIndex, ModelComboBoxItem, (Category)CategoryComboBoxIndex, NumberOfStrings,  (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex);
             ICollection<Guitar> guitars = inventory.Search(searchGuitarSpecification);
 
             ResultsTextBox = "";

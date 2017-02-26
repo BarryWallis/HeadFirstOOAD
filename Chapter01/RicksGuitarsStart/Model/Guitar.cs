@@ -17,16 +17,12 @@ namespace RicksGuitarsStart.Model
         /// </summary>
         /// <param name="serialNumber">The Guitar serial number.</param>
         /// <param name="price">The Guitar price.</param>
-        /// <param name="builder">The Guitar builder.</param>
-        /// <param name="model">The Guitar model.</param>
-        /// <param name="category">The Guitar type.</param>
-        /// <param name="topWood">The Guitar  top wood.</param>
-        /// <param name="backWood">The Guitar  back wood.</param>
-        public Guitar(string serialNumber, decimal price, Builder builder, string model, Category category, Wood topWood, Wood backWood)
+        /// <param name="specification">The specification of the Guitar.</param>
+        public Guitar(string serialNumber, decimal price, GuitarSpecification specification)
         {
             SerialNumber = serialNumber;
             Price = price;
-            Specification = new GuitarSpecification(builder, model, category, topWood, backWood);
+            Specification = specification;
         }
     }
 }
