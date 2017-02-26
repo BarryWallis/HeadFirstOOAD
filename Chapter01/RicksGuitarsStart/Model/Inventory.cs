@@ -87,19 +87,8 @@ namespace RicksGuitarsStart.Model
             List<Guitar> foundGuitars = new List<Guitar>();
             foreach (Guitar guitar in guitars)
             {
-                if (searchGuitarSpecification.Builder != guitar.Specification.Builder)
-                    continue;
-                if (!string.IsNullOrEmpty(guitar.Specification.Model) && searchGuitarSpecification.Model != guitar.Specification.Model)
-                    continue;
-                if (searchGuitarSpecification.Category != guitar.Specification.Category)
-                    continue;
-                if (searchGuitarSpecification.NumberOfStrings != guitar.Specification.NumberOfStrings)
-                    continue;
-                if (searchGuitarSpecification.TopWood != guitar.Specification.TopWood)
-                    continue;
-                if (searchGuitarSpecification.BackWood != guitar.Specification.BackWood)
-                    continue;
-                foundGuitars.Add(guitar);
+                if (searchGuitarSpecification == guitar.Specification)
+                    foundGuitars.Add(guitar);
             }
 
             return foundGuitars;
