@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter01", "Chapter01", "{6AC2909E-8163-4307-93F5-71DE4255ABE0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RicksGuitarsStart", "Chapter01\RicksGuitarsStart\RicksGuitarsStart.csproj", "{906A55DA-7C57-4327-9B9F-5C6813F1FB0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RicksGuitarsStart", "RicksGuitarsStart\RicksGuitarsStart.csproj", "{906A55DA-7C57-4327-9B9F-5C6813F1FB0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,8 +18,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{906A55DA-7C57-4327-9B9F-5C6813F1FB0A} = {6AC2909E-8163-4307-93F5-71DE4255ABE0}
 	EndGlobalSection
 EndGlobal
