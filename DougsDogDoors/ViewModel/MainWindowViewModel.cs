@@ -17,18 +17,23 @@ namespace DougsDogDoors.ViewModel
         private Remote remote;
 
         #region Properties
-        public string DoorStatus => dogDoor.Open ? "Open" : "Closed";
+        public string DoorState => dogDoor.Open ? "Open" : "Closed";
         #endregion
 
         public MainWindowViewModel()
         {
             remote = new Remote(dogDoor);
+            dogDoor.StateChanged += DogDoorStateChanged;
         }
 
         internal void PressButton()
         {
             remote.PressButton();
-            NotifyPropertyChanged("DoorStatus");
+        }
+
+        void DogDoorStateChanged(object sender, DogDoorStateChangedEventArgs e)
+        {
+            NotifyPropertyChanged("DoorState");
         }
 
         // This method is called by the Set accessor of each property. 

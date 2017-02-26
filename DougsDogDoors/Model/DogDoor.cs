@@ -8,11 +8,22 @@ namespace DougsDogDoors.Model
 {
     public class DogDoor
     {
+        public event EventHandler<DogDoorStateChangedEventArgs> StateChanged;
+
         private bool _open = false;
         public bool Open
         {
             get => _open;
-            set => _open = value;
+            set
+            {
+                if (_open != value)
+                {
+                    _open = value;
+                    OnStateChanged(new DogDoorStateChangedEventArgs(value));
+                }
+            }
         }
+
+        protected virtual void OnStateChanged(DogDoorStateChangedEventArgs e) => StateChanged?.Invoke(this, e);
     }
 }
