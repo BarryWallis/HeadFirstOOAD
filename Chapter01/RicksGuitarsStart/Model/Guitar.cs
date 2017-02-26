@@ -8,13 +8,9 @@ namespace RicksGuitarsStart.Model
 {
     class Guitar
     {
-        public string SerialNumber { get; set; }
-        public decimal Price { get; set; }
-        public Builder Builder { get; set; }
-        public string Model { get; set; }
-        public Category Category { get; set; }
-        public Wood TopWood { get; set; }
-        public Wood BackWood { get; set; }
+        public string SerialNumber { get; }
+        public decimal Price { get; }
+        public GuitarSpecification Specification { get; }
 
         /// <summary>
         /// Create a new Guitar instance.
@@ -30,11 +26,7 @@ namespace RicksGuitarsStart.Model
         {
             SerialNumber = serialNumber;
             Price = price;
-            Builder = builder;
-            Model = model;
-            Category = category;
-            TopWood = topWood;
-            BackWood = backWood;
+            Specification = new GuitarSpecification(builder, model, category, topWood, backWood);
         }
     }
 }

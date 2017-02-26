@@ -17,8 +17,8 @@ namespace RicksGuitarsStart.Model
                 List<string> models = new List<string>();
                 foreach (Guitar guitar in guitars)
                 {
-                    if (!models.Contains(guitar.Model))
-                        models.Add(guitar.Model);
+                    if (!models.Contains(guitar.Specification.Model))
+                        models.Add(guitar.Specification.Model);
                 }
                 models.Sort();
                 return models;
@@ -38,27 +38,27 @@ namespace RicksGuitarsStart.Model
         /// </summary>
         public void Initialize()
         {
-            guitars.Add(new Guitar("11277", 3999.95m, Builder.Collings, "CJ", Category.Acoustic,
+            Add(new Guitar("11277", 3999.95m, Builder.Collings, "CJ", Category.Acoustic,
                                 Wood.IndianRosewood, Wood.Sitka));
-            guitars.Add(new Guitar("V95693", 1499.95m, Builder.Fender, "Stratocastor", Category.Electric,
+            Add(new Guitar("V95693", 1499.95m, Builder.Fender, "Stratocastor", Category.Electric,
                                 Wood.Alder, Wood.Alder));
-            guitars.Add(new Guitar("V9512", 1549.95m, Builder.Fender, "Stratocastor", Category.Electric,
+            Add(new Guitar("V9512", 1549.95m, Builder.Fender, "Stratocastor", Category.Electric,
                                 Wood.Alder, Wood.Alder));
-            guitars.Add(new Guitar("122784", 5495.95m, Builder.Martin, "D-18", Category.Acoustic,
+            Add(new Guitar("122784", 5495.95m, Builder.Martin, "D-18", Category.Acoustic,
                                 Wood.Mahogany, Wood.Adirondack));
-            guitars.Add(new Guitar("76531", 6295.95m, Builder.Martin, "OM-28", Category.Acoustic,
+            Add(new Guitar("76531", 6295.95m, Builder.Martin, "OM-28", Category.Acoustic,
                                 Wood.BrazilianRosewood, Wood.Adirondack));
-            guitars.Add(new Guitar("70108276", 2295.95m, Builder.Gibson, "Les Paul", Category.Electric,
+            Add(new Guitar("70108276", 2295.95m, Builder.Gibson, "Les Paul", Category.Electric,
                                 Wood.Mahogany, Wood.Maple));
-            guitars.Add(new Guitar("82765501", 1890.95m, Builder.Gibson, "SG '61 Reissue",
+            Add(new Guitar("82765501", 1890.95m, Builder.Gibson, "SG '61 Reissue",
                                 Category.Electric, Wood.Mahogany, Wood.Mahogany));
-            guitars.Add(new Guitar("77023", 6275.95m, Builder.Martin, "D-28", Category.Acoustic,
+            Add(new Guitar("77023", 6275.95m, Builder.Martin, "D-28", Category.Acoustic,
                                 Wood.BrazilianRosewood, Wood.Adirondack));
-            guitars.Add(new Guitar("1092", 12995.95m, Builder.Olson, "SJ", Category.Acoustic,
+            Add(new Guitar("1092", 12995.95m, Builder.Olson, "SJ", Category.Acoustic,
                                 Wood.IndianRosewood, Wood.Cedar));
-            guitars.Add(new Guitar("566-62", 8999.95m, Builder.Ryan, "Cathedral", Category.Acoustic,
+            Add(new Guitar("566-62", 8999.95m, Builder.Ryan, "Cathedral", Category.Acoustic,
                                 Wood.Cocobolo, Wood.Cedar));
-            guitars.Add(new Guitar("6 29584", 2100.95m, Builder.PRS, "Dave Navarro Signature",
+            Add(new Guitar("6 29584", 2100.95m, Builder.PRS, "Dave Navarro Signature",
                                 Category.Electric, Wood.Mahogany, Wood.Maple));
         }
 
@@ -79,23 +79,23 @@ namespace RicksGuitarsStart.Model
         /// </summary>
         /// <param name="searchGuitar">The Guitar to searcvh for.</param>
         /// <returns>A collection of all the guitars that match the criteria.</returns>
-        public ICollection<Guitar> Search(Guitar searchGuitar)
+        public ICollection<Guitar> Search(GuitarSpecification searchGuitarSpecification)
         {
-            if (searchGuitar is null)
-                throw new ArgumentNullException(nameof(searchGuitar));
+            if (searchGuitarSpecification is null)
+                throw new ArgumentNullException(nameof(searchGuitarSpecification));
 
             List<Guitar> foundGuitars = new List<Guitar>();
             foreach (Guitar guitar in guitars)
             {
-                if (searchGuitar.Builder != guitar.Builder)
+                if (searchGuitarSpecification.Builder != guitar.Specification.Builder)
                     continue;
-                if (!string.IsNullOrEmpty(guitar.Model) && searchGuitar.Model != guitar.Model)
+                if (!string.IsNullOrEmpty(guitar.Specification.Model) && searchGuitarSpecification.Model != guitar.Specification.Model)
                     continue;
-                if (searchGuitar.Category != guitar.Category)
+                if (searchGuitarSpecification.Category != guitar.Specification.Category)
                     continue;
-                if (searchGuitar.TopWood != guitar.TopWood)
+                if (searchGuitarSpecification.TopWood != guitar.Specification.TopWood)
                     continue;
-                if (searchGuitar.BackWood != guitar.BackWood)
+                if (searchGuitarSpecification.BackWood != guitar.Specification.BackWood)
                     continue;
                 foundGuitars.Add(guitar);
             }

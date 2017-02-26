@@ -30,17 +30,6 @@ namespace RicksGuitarsStart.ViewModel
             }
         }
 
-        private int _modelComboBoxIndex;
-        public int ModelComboBoxIndex
-        {
-            get { return _modelComboBoxIndex; }
-            set
-            {
-                _modelComboBoxIndex = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         private string _resultsTextBox;
         public string ResultsTextBox
         {
@@ -121,8 +110,8 @@ namespace RicksGuitarsStart.ViewModel
         /// </summary>
         internal void Search()
         {
-            Guitar searchGuitar = new Guitar(null, 0, (Builder)BuilderComboBoxIndex, ModelComboBoxItem, (Category)CategoryComboBoxIndex, (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex);
-            ICollection<Guitar> guitars = inventory.Search(searchGuitar);
+            GuitarSpecification searchGuitarSpecification = new GuitarSpecification((Builder)BuilderComboBoxIndex, ModelComboBoxItem, (Category)CategoryComboBoxIndex, (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex);
+            ICollection<Guitar> guitars = inventory.Search(searchGuitarSpecification);
 
             ResultsTextBox = "";
             if (guitars.Count > 0)
@@ -143,11 +132,11 @@ namespace RicksGuitarsStart.ViewModel
         private void AddGuitarToTextBox(Guitar guitar)
         {
             ResultsTextBox += $"{guitar.SerialNumber} is {guitar.Price:C}\n";
-            ResultsTextBox += $"\tBuilder: {guitar.Builder}\n";
-            ResultsTextBox += $"\tModel: { guitar.Model}\n";
-            ResultsTextBox += $"\tCategory: { guitar.Category}\n";
-            ResultsTextBox += $"\tTop Wood: { guitar.TopWood}\n";
-            ResultsTextBox += $"\tBack Wood: {guitar.BackWood}\n";
+            ResultsTextBox += $"\tBuilder: {guitar.Specification.Builder}\n";
+            ResultsTextBox += $"\tModel: { guitar.Specification.Model}\n";
+            ResultsTextBox += $"\tCategory: { guitar.Specification.Category}\n";
+            ResultsTextBox += $"\tTop Wood: { guitar.Specification.TopWood}\n";
+            ResultsTextBox += $"\tBack Wood: {guitar.Specification.BackWood}\n";
         }
     }
 }
