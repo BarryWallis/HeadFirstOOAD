@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RicksGuitarsStart", "RicksGuitarsStart\RicksGuitarsStart.csproj", "{906A55DA-7C57-4327-9B9F-5C6813F1FB0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DougsDogDoors", "DougsDogDoors\DougsDogDoors.csproj", "{4353D758-9035-48CB-AE09-BA98FFB8D4A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{906A55DA-7C57-4327-9B9F-5C6813F1FB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{906A55DA-7C57-4327-9B9F-5C6813F1FB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{906A55DA-7C57-4327-9B9F-5C6813F1FB0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4353D758-9035-48CB-AE09-BA98FFB8D4A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4353D758-9035-48CB-AE09-BA98FFB8D4A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4353D758-9035-48CB-AE09-BA98FFB8D4A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4353D758-9035-48CB-AE09-BA98FFB8D4A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
