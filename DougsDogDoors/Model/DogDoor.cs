@@ -11,7 +11,7 @@ namespace DougsDogDoors.Model
         public event EventHandler<DogDoorStateChangedEventArgs> StateChanged;
 
         private bool _open = false;
-        public bool Open
+        public bool IsOpen
         {
             get => _open;
             set

@@ -17,7 +17,7 @@ namespace DougsDogDoors.ViewModel
         private Remote remote;
 
         #region Properties
-        public string DoorState => dogDoor.Open ? "Open" : "Closed";
+        public string DoorState => dogDoor.IsOpen ? "Open" : "Closed";
         #endregion
 
         public MainWindowViewModel()
