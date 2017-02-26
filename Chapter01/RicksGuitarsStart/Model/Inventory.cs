@@ -10,7 +10,22 @@ namespace RicksGuitarsStart.Model
     {
         private List<Guitar> guitars = new List<Guitar>();
 
-        /// <summary>
+        public ICollection<string> Models
+        {
+            get
+            {
+                List<string> models = new List<string>();
+                foreach (Guitar guitar in guitars)
+                {
+                    if (!models.Contains(guitar.Model))
+                        models.Add(guitar.Model);
+                }
+                models.Sort();
+                return models;
+            }
+        }
+
+       /// <summary>
         /// Create a new instance of Inventory.
         /// </summary>
         public Inventory()

@@ -81,13 +81,15 @@
                   Margin="5, 5, 5, 0"
                   Width="75"
                   VerticalAlignment="Top" />
-        <TextBox Grid.Row="1"
-                 Grid.Column="2"
-                 Text="{Binding ModelTextBox}"
-                 Width="75"
-                 Margin="5, 5, 5, 0"
-                 Height="22"
-                 VerticalAlignment="Top" />
+        <ComboBox Grid.Row="1"
+                  Grid.Column="2"
+                  Name="ModelComboBox"
+                  ItemsSource="{Binding Models}"
+                  SelectedItem="{Binding ModelComboBoxItem,Mode=OneWayToSource}"
+                  Width="170"
+                  Margin="5, 5, 5, 0"
+                  Height="22"
+                  VerticalAlignment="Top" />
         <ComboBox ItemsSource="{Binding Source={StaticResource CategoryValues}}"
                   Grid.Row="1"
                   Grid.Column="3"

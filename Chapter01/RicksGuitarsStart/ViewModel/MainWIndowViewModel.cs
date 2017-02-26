@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -14,14 +15,28 @@ namespace RicksGuitarsStart.ViewModel
     {
         private Inventory inventory = new Inventory();
 
-#region Properties
-        private string _modelTextBox;
-        public string ModelTextBox
+        #region Properties
+        private ObservableCollection<string> _models;
+        public ObservableCollection<string> Models { get => _models; }
+
+        private string _modelComboBoxItem;
+        public string ModelComboBoxItem
         {
-            get { return _modelTextBox; }
+            get { return _modelComboBoxItem; }
             set
             {
-                _modelTextBox = value;
+                _modelComboBoxItem = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _modelComboBoxIndex;
+        public int ModelComboBoxIndex
+        {
+            get { return _modelComboBoxIndex; }
+            set
+            {
+                _modelComboBoxIndex = value;
                 NotifyPropertyChanged();
             }
         }
@@ -88,6 +103,7 @@ namespace RicksGuitarsStart.ViewModel
 
             ResultsTextBox = " ";
             inventory.Initialize();
+            _models = new ObservableCollection<string>(inventory.Models);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -100,9 +116,12 @@ namespace RicksGuitarsStart.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Search for the given guitar and populate the ResultsTextBox.
+        /// </summary>
         internal void Search()
         {
-            Guitar searchGuitar = new Guitar(null, 0, (Builder)BuilderComboBoxIndex, ModelTextBox, (Category)CategoryComboBoxIndex, (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex);
+            Guitar searchGuitar = new Guitar(null, 0, (Builder)BuilderComboBoxIndex, ModelComboBoxItem, (Category)CategoryComboBoxIndex, (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex);
             ICollection<Guitar> guitars = inventory.Search(searchGuitar);
 
             ResultsTextBox = "";
@@ -117,6 +136,10 @@ namespace RicksGuitarsStart.ViewModel
                 ResultsTextBox = "No guitars found.";
         }
 
+        /// <summary>
+        /// Add guitar info to ResultsTextBox.
+        /// </summary>
+        /// <param name="guitar"></param>
         private void AddGuitarToTextBox(Guitar guitar)
         {
             ResultsTextBox += $"{guitar.SerialNumber} is {guitar.Price:C}\n";
