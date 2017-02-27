@@ -10,30 +10,31 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DougsDogDoors.Model;
 using DougsDogDoors.ViewModel;
 
 namespace DougsDogDoors
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddBarksWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddBarksWindow : Window
     {
-        private MainWindowViewModel viewModel = new MainWindowViewModel();
+        AddBarksViewModel viewModel;
 
-        public MainWindow()
+        public AddBarksWindow(DogDoor dogDoor)
         {
             InitializeComponent();
 
+            viewModel = new AddBarksViewModel(dogDoor);
             DataContext = viewModel;
         }
 
-        private void OpenCloseButton_Click(object sender, RoutedEventArgs e) => viewModel.PressButton();
-
-        private void BarkButton_Click(object sender, RoutedEventArgs e) => viewModel.BarkRecognized();
-
-        private void AddBarksButton_Click(object sender, RoutedEventArgs e) => viewModel.AddBarks();
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!viewModel.AddBark())
+                MessageBox.Show($"Cannot add bark", "Add Bark", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }

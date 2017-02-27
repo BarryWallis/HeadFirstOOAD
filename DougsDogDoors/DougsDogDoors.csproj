@@ -71,11 +71,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddBarksWindow.xaml.cs">
+      <DependentUpon>AddBarksWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Bark.cs" />
     <Compile Include="BarkRecognizedEventArgs.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\BarkRecognizer.cs" />
     <Compile Include="Model\DogDoorStateChangedEventArgs.cs" />
+    <Compile Include="ViewModel\AddBarksViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Page Include="AddBarksWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

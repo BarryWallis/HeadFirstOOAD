@@ -21,13 +21,9 @@ namespace DougsDogDoors.ViewModel
         #region Properties
         public string DoorState => dogDoor.IsOpen ? "Open" : "Closed";
 
-        private string bark;
+        public string Bark { get; set; }
 
-        public string Bark
-        {
-            get { return bark; }
-            set { bark = value; }
-        }
+        public string TrainingText { get; set; }
         #endregion
 
         public MainWindowViewModel()
@@ -39,7 +35,13 @@ namespace DougsDogDoors.ViewModel
             barkRecognizer.BarkRecognized += BarkRecognized;
         }
 
-        internal void BarkRecognized() => barkRecognizer.Recognize(Bark);
+        internal void BarkRecognized()
+        {
+            if (!barkRecognizer.Recognize(Bark))
+                MessageBox.Show($"Unrecognized bark: {Bark}");
+        }
+
+        internal void AddBarks() => new AddBarksWindow(dogDoor).ShowDialog();
 
         internal void PressButton() => remote.PressButton();
 

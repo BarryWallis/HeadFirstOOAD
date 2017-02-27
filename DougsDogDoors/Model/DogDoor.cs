@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace DougsDogDoors.Model
             Interval = new TimeSpan(0, 0, 5)
         };
 
+        #region Properties
         private bool _open = false;
         public bool IsOpen
         {
@@ -34,6 +36,9 @@ namespace DougsDogDoors.Model
                 }
             }
         }
+
+        public Collection<Bark> Barks { get; } = new Collection<Bark>();
+        #endregion
 
         public DogDoor() => timer.Tick += Timer_Tick;
 

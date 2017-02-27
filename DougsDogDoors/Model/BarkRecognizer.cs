@@ -20,10 +20,16 @@ namespace DougsDogDoors.Model
             this.dogDoor = dogDoor;
         }
 
-        public void Recognize(string bark)
+        public bool Recognize(string bark)
         {
-            dogDoor.IsOpen = true;
-            OnBarkRecognized(new BarkRecognizedEventArgs(bark));
+            if (dogDoor.Barks.Contains(new Bark(bark)))
+            {
+                dogDoor.IsOpen = true;
+                OnBarkRecognized(new BarkRecognizedEventArgs(bark));
+                return true;
+            }
+            else
+                return false;
         }
 
         protected virtual void OnBarkRecognized(BarkRecognizedEventArgs e) => BarkRecognized?.Invoke(this, e);
