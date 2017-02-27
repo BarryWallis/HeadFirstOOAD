@@ -11,10 +11,6 @@ namespace DougsDogDoors.Model
     public class Remote
     {
         private DogDoor dogDoor;
-        private DispatcherTimer timer = new DispatcherTimer()
-        {
-            Interval = new TimeSpan(0, 0, 5)
-        };
 
         /// <summary>
         /// Create an instance of the remote control.
@@ -22,8 +18,10 @@ namespace DougsDogDoors.Model
         /// <param name="dogDoor">The DogDoor that this Remote will control.</param>
         public Remote(DogDoor dogDoor)
         {
+            if (dogDoor is null)
+                throw new ArgumentNullException(nameof(dogDoor));
+
             this.dogDoor = dogDoor;
-            timer.Tick += Timer_Tick;
 
         }
 
@@ -32,22 +30,8 @@ namespace DougsDogDoors.Model
         /// </summary>
         public void PressButton()
         {
-            Debug.Assert(timer != null);
             Debug.Assert(dogDoor != null);
-
-            timer.Stop();
             dogDoor.IsOpen = !dogDoor.IsOpen;
-            if (dogDoor.IsOpen)
-                timer.Start();
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            Debug.Assert(dogDoor != null);
-            Debug.Assert(timer != null);
-
-            dogDoor.IsOpen = false;
-            timer.Stop();
         }
     }
 }

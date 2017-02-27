@@ -5,20 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DougsDogDoors"
         mc:Ignorable="d"
+        FontSize="12"
         SizeToContent="WidthAndHeight"
-        Title="Doug's Dog Doors" >
-    <StackPanel Orientation="Horizontal"
-                Margin="10">
+        Title="Doug's Dog Doors">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <Button Content="_Open / Close"
                 Name="OpenCloseButton"
+                Grid.Row="0"
+                Grid.Column="0"
                 Click="OpenCloseButton_Click"
                 Padding="5"
-                Margin="0, 0, 10, 0" />
-        <TextBlock Text="Door Status: "
-                   VerticalAlignment="Center"
-                   Margin="0, 0, 0, 0" />
+                Margin="0, 0, 10, 5" />
+        <Button Content="_Bark"
+                Name="BarkButton"
+                Grid.Row="1"
+                Grid.Column="0"
+                Click="BarkButton_Click"
+                Padding="5"
+                Margin="0, 5, 10, 0" />
+        <TextBox Text="{Binding Bark}"
+                 Grid.Row="1"
+                 Grid.Column="1" 
+                 VerticalAlignment="Bottom"
+                 MinWidth="100"/>
         <TextBlock Text="{Binding DoorState}"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Margin="5, 10, 0, 0"
+                   FontWeight="Bold"
                    VerticalAlignment="Center"
-                   Width="40"/>
-    </StackPanel>
+                   HorizontalAlignment="Center" />
+    </Grid>
 </Window>

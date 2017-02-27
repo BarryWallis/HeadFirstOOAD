@@ -34,5 +34,10 @@ namespace DougsDogDoors
         {
             viewModel.PressButton();
         }
+
+        private void BarkButton_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.BarkRecognized();
+        }
     }
 }

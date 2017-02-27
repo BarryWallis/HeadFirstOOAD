@@ -11,7 +11,7 @@ namespace DougsDogDoors.Model
         public bool IsOpen { get; }
 
         /// <summary>
-        /// Create a new DogDorStateChanged instance.
+        /// Create a new DogDoorStateChangedEventArgs instance.
         /// </summary>
         /// <param name="isOpen">True if the DogDoor is open; otherwise false.</param>
         public DogDoorStateChangedEventArgs(bool isOpen) => IsOpen = isOpen;

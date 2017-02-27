@@ -71,7 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BarkRecognizedEventArgs.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Model\BarkRecognizer.cs" />
     <Compile Include="Model\DogDoorStateChangedEventArgs.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
