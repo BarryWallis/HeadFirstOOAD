@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,14 +9,14 @@ namespace RicksGuitarsStart.Model
 {
     class Inventory
     {
-        private List<Guitar> guitars = new List<Guitar>();
+        private List<Instrument> instruments = new List<Instrument>();
 
         public ICollection<string> Models
         {
             get
             {
                 List<string> models = new List<string>();
-                foreach (Guitar guitar in guitars)
+                foreach (Guitar guitar in instruments)
                 {
                     if (!models.Contains(guitar.Specification.Model))
                         models.Add(guitar.Specification.Model);
@@ -66,12 +67,23 @@ namespace RicksGuitarsStart.Model
         /// Add a Guitar to the inventory.
         /// </summary>
         /// <param name="guitar">The Guitar to add to the inventory.</param>
-        public void Add(Guitar guitar)
+        public void Add(Instrument instrument)
         {
-            if (guitar is null)
-                throw new ArgumentNullException(nameof(guitar));
+            if (instrument is null)
+                throw new ArgumentNullException(nameof(instrument));
 
-            guitars.Add(guitar);
+            switch (instrument)
+            {
+                case Guitar guitar:
+                    instruments.Add(guitar);
+                    break;
+                case Mandolin mandolin:
+                    instruments.Add(mandolin);
+                    break;
+                default:
+                    Debug.Fail("Unexpected instrument");
+                    break;
+            }
         }
 
         /// <summary>
@@ -85,13 +97,28 @@ namespace RicksGuitarsStart.Model
                 throw new ArgumentNullException(nameof(searchGuitarSpecification));
 
             List<Guitar> foundGuitars = new List<Guitar>();
-            foreach (Guitar guitar in guitars)
+            foreach (Guitar guitar in instruments)
             {
                 if (searchGuitarSpecification == guitar.Specification)
                     foundGuitars.Add(guitar);
             }
 
             return foundGuitars;
+        }
+
+        public ICollection<Mandolin> Search(MandolinSpecification searchMandolinSpecification)
+        {
+            if (searchMandolinSpecification is null)
+                throw new ArgumentNullException(nameof(searchMandolinSpecification));
+
+            List<Mandolin> foundMandolins = new List<Mandolin>();
+            foreach (Mandolin mandolin in instruments)
+            {
+                if (searchMandolinSpecification == mandolin.Specification)
+                    foundMandolins.Add(mandolin);
+            }
+
+            return foundMandolins;
         }
     }
 }

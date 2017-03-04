@@ -57,6 +57,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\GuitarSpecification.cs" />
+    <Compile Include="Model\Instrument.cs" />
+    <Compile Include="Model\InstrumentSpecification.cs" />
+    <Compile Include="Model\Mandolin.cs" />
+    <Compile Include="Model\MandolinSpecification.cs" />
+    <Compile Include="Model\Style.cs" />
     <Compile Include="ViewModel\MainWIndowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

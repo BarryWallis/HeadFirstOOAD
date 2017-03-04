@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace RicksGuitarsStart.Model
 {
-    public class GuitarSpecification : IEquatable<GuitarSpecification>
+    public class GuitarSpecification : InstrumentSpecification, IEquatable<GuitarSpecification>
     {
-        public Builder Builder { get; }
-        public string Model { get; }
-        public Category Category { get; }
-        public Wood TopWood { get;  }
-        public Wood BackWood { get;  }
         public int NumberOfStrings { get; }
 
         /// <summary>
@@ -24,19 +19,12 @@ namespace RicksGuitarsStart.Model
         /// <param name="numberOfStrings">The number of strings on the Guitar.</param>
         /// <param name="topWood">The Guitar  top wood.</param>
         /// <param name="backWood">The Guitar  back wood.</param>
-        public GuitarSpecification(Builder builder, string model, Category category, int numberOfStrings, Wood topWood, Wood backWood)
+        public GuitarSpecification(Builder builder, string model, Category category, int numberOfStrings, Wood topWood, Wood backWood) : base(builder, model, category,topWood, backWood)
         {
-            if (string.IsNullOrWhiteSpace(model))
-                throw new ArgumentNullException(nameof(model));
             if (numberOfStrings <= 0)
                 throw new ArgumentOutOfRangeException(nameof(numberOfStrings), numberOfStrings, "must be greater than 0");
 
-            Builder = builder;
-            Model = model;
-            Category = category;
             NumberOfStrings = numberOfStrings;
-            TopWood = topWood;
-            BackWood = backWood;
         }
 
         /// <summary>
@@ -44,7 +32,7 @@ namespace RicksGuitarsStart.Model
         /// </summary>
         /// <param name="other">The second GuitarSpecification to check for equality.</param>
         /// <returns>True if the two GuitarSpecifications are equal; otherwise false.</returns>
-        public bool Equals(GuitarSpecification other) => other != null && Builder == other.Builder && Model == other.Model && Category == other.Category && NumberOfStrings == other.NumberOfStrings && TopWood == other.TopWood && BackWood == other.BackWood;
+        public bool Equals(GuitarSpecification other) => other != null && base.Equals(other) && NumberOfStrings == other.NumberOfStrings;
 
         /// <summary>
         /// Check if the GuitarSpecification is equal to the given object.
@@ -61,7 +49,7 @@ namespace RicksGuitarsStart.Model
         /// Return the hash code for the GuitarSpecification.
         /// </summary>
         /// <returns>The hash code for the GuitarSpecification.</returns>
-        public override int GetHashCode() => Tuple.Create(Builder, Model, Category, NumberOfStrings, TopWood, BackWood).GetHashCode();
+        public override int GetHashCode() => Tuple.Create(base.GetHashCode(), NumberOfStrings).GetHashCode();
 
         /// <summary>
         /// Check if two GuitarSpecifications are equal.
