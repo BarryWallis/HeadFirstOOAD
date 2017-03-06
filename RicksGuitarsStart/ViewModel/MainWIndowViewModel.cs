@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using RicksGuitarsStart.Model;
 
 namespace RicksGuitarsStart.ViewModel
@@ -18,6 +19,9 @@ namespace RicksGuitarsStart.ViewModel
         #region Properties
         private ObservableCollection<string> _models;
         public ObservableCollection<string> Models { get => _models; }
+
+        private ObservableCollection<string> _instruments = new ObservableCollection<string>();
+        public ObservableCollection<string> Instruments { get => _instruments; }
 
         private string _modelComboBoxItem;
         public string ModelComboBoxItem
@@ -95,6 +99,28 @@ namespace RicksGuitarsStart.ViewModel
                 NotifyPropertyChanged();
             }
         }
+
+        private int _styleComboBoxIndex = 0;
+        public int StyleComboBoxIndex
+        {
+            get { return _styleComboBoxIndex; }
+            set
+            {
+                _styleComboBoxIndex = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _instrumentCombBoxItem;
+        public string InstrumentCombBoxItem
+        {
+            get { return _instrumentCombBoxItem; }
+            set
+            {
+                _instrumentCombBoxItem = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         public MainWIndowViewModel()
@@ -105,6 +131,10 @@ namespace RicksGuitarsStart.ViewModel
             inventory.Initialize();
             _models = new ObservableCollection<string>(inventory.Models);
             _modelComboBoxItem = _models[0];
+            _instruments.Add("Guitar");
+            _instruments.Add("Mandolin");
+            _instrumentCombBoxItem = _instruments[0];
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -118,23 +148,42 @@ namespace RicksGuitarsStart.ViewModel
         }
 
         /// <summary>
-        /// Search for the given guitar and populate the ResultsTextBox.
+        /// Search for the given instrument and populate the ResultsTextBox.
         /// </summary>
         internal void Search()
         {
-            GuitarSpecification searchGuitarSpecification = new GuitarSpecification((Builder)BuilderComboBoxIndex, ModelComboBoxItem, (Category)CategoryComboBoxIndex, NumberOfStrings,  (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex);
-            ICollection<Guitar> guitars = inventory.Search(searchGuitarSpecification);
-
-            ResultsTextBox = "";
-            if (guitars.Count > 0)
+            switch (InstrumentCombBoxItem)
             {
-                foreach (Guitar guitar in guitars)
-                {
-                    AddGuitarToTextBox(guitar);
-                }
+                case "Guitar":
+                    ICollection<Guitar> guitars = inventory.Search(new GuitarSpecification((Builder)BuilderComboBoxIndex, ModelComboBoxItem, (Category)CategoryComboBoxIndex, NumberOfStrings, (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex));
+                    if (guitars.Count > 0)
+                    {
+                        ResultsTextBox = "";
+                        foreach (Guitar guitar in guitars)
+                        {
+                            AddGuitarToTextBox(guitar);
+                        }
+                    }
+                    else
+                        ResultsTextBox = "No guitars found.";
+                    break;
+                case "Mandolin":
+                    ICollection<Mandolin> mandolins = inventory.Search(new MandolinSpecification((Builder)BuilderComboBoxIndex, ModelComboBoxItem, (Category)CategoryComboBoxIndex, (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex, (Style)StyleComboBoxIndex));
+                    if (mandolins.Count > 0)
+                    {
+                        ResultsTextBox = "";
+                        foreach (Mandolin mandolin in mandolins)
+                        {
+                            AddMandolinToTextBox(mandolin);
+                        }
+                    }
+                    else
+                        ResultsTextBox = "No mandolins found.";
+                    break;
+                default:
+                    Debug.Fail("Unexpected instrument found");
+                    break;
             }
-            else
-                ResultsTextBox = "No guitars found.";
         }
 
         /// <summary>
@@ -149,6 +198,21 @@ namespace RicksGuitarsStart.ViewModel
             ResultsTextBox += $"\tCategory: { guitar.Specification.Category}\n";
             ResultsTextBox += $"\tTop Wood: { guitar.Specification.TopWood}\n";
             ResultsTextBox += $"\tBack Wood: {guitar.Specification.BackWood}\n";
+        }
+
+        /// <summary>
+        /// Add mandolin info to ResultsTextBox.
+        /// </summary>
+        /// <param name="mandolin"></param>
+        private void AddMandolinToTextBox(Mandolin mandolin)
+        {
+            ResultsTextBox += $"{mandolin.SerialNumber} is {mandolin.Price:C}\n";
+            ResultsTextBox += $"\tBuilder: {mandolin.Specification.Builder}\n";
+            ResultsTextBox += $"\tModel: { mandolin.Specification.Model}\n";
+            ResultsTextBox += $"\tCategory: { mandolin.Specification.Category}\n";
+            ResultsTextBox += $"\tTop Wood: { mandolin.Specification.TopWood}\n";
+            ResultsTextBox += $"\tBack Wood: {mandolin.Specification.BackWood}\n";
+            ResultsTextBox += $"\tStyle: {mandolin.Specification.Style}\n";
         }
     }
 }

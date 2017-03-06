@@ -31,6 +31,13 @@
                 <x:Type TypeName="model:Wood" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        <ObjectDataProvider MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            x:Key="StyleValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="model:Style" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </Window.Resources>
     <Grid Margin="10" >
         <Grid.RowDefinitions>
@@ -46,30 +53,44 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Builder"
+        <TextBlock Text="Instrument"
                    Grid.Row="0"
                    Grid.Column="1"
                    HorizontalAlignment="Center" />
-        <TextBlock Text="Model"
+        <TextBlock Text="Builder"
                    Grid.Row="0"
                    Grid.Column="2"
                    HorizontalAlignment="Center" />
-        <TextBlock Text="Category"
+        <TextBlock Text="Model"
                    Grid.Row="0"
                    Grid.Column="3"
                    HorizontalAlignment="Center" />
-        <TextBlock Text="Top Wood"
+        <TextBlock Text="Category"
                    Grid.Row="0"
                    Grid.Column="4"
                    HorizontalAlignment="Center" />
-        <TextBlock Text="Bottom Wood"
+        <TextBlock Text="Top Wood"
                    Grid.Row="0"
                    Grid.Column="5"
                    HorizontalAlignment="Center" />
-        <TextBlock Text="Number of Strings"
+        <TextBlock Text="Bottom Wood"
                    Grid.Row="0"
                    Grid.Column="6"
+                   HorizontalAlignment="Center" />
+        <TextBlock Text="Number of Strings"
+                   Grid.Row="0"
+                   Grid.Column="7"
+                   Name="NumberOfStringsLabel"
+                   Width="97"
+                   HorizontalAlignment="Center" />
+        <TextBlock Text="Style"
+                   Grid.Row="0"
+                   Grid.Column="7"
+                   Name="StyleLabel"
+                   Width="97"
+                   Visibility="Hidden"
                    HorizontalAlignment="Center" />
         <Button Content="_Search"
                 Grid.Row="1"
@@ -78,16 +99,27 @@
                 Click="SearchButton_Click"
                 Width="75"
                 Height="22"
-                VerticalAlignment="Bottom" />
+                VerticalAlignment="Top"
+                Margin="0,5,0,0" />
+        <ComboBox Grid.Row="1"
+                  Grid.Column="1"
+                  Margin="5, 5, 5, 0"
+                  VerticalAlignment="Top"
+                  Width="80"
+                  Name="InstrumentComboBox"
+                  ItemsSource="{Binding Instruments}"
+                  SelectedItem="{Binding InstrumentCombBoxItem}"
+                  SelectionChanged="InstrumentComboBox_SelectionChanged">
+        </ComboBox>
         <ComboBox ItemsSource="{Binding Source={StaticResource BuilderValues}}"
                   Grid.Row="1"
-                  Grid.Column="1"
+                  Grid.Column="2"
                   SelectedIndex="{Binding BuilderComboBoxIndex}"
                   Margin="5, 5, 5, 0"
                   Width="75"
                   VerticalAlignment="Top" />
         <ComboBox Grid.Row="1"
-                  Grid.Column="2"
+                  Grid.Column="3"
                   Name="ModelComboBox"
                   ItemsSource="{Binding Models}"
                   SelectedItem="{Binding ModelComboBoxItem}"
@@ -97,27 +129,36 @@
                   VerticalAlignment="Top" />
         <ComboBox ItemsSource="{Binding Source={StaticResource CategoryValues}}"
                   Grid.Row="1"
-                  Grid.Column="3"
+                  Grid.Column="4"
                   SelectedIndex="{Binding CategoryComboBoxIndex}"
                   Margin="5, 5, 5, 0"
                   Width="75" />
         <ComboBox ItemsSource="{Binding Source={StaticResource WoodValues}}"
                   Grid.Row="1"
-                  Grid.Column="4"
+                  Grid.Column="5"
                   SelectedIndex="{Binding TopWoodComboBoxIndex}"
                   Margin="5, 5, 5, 0"
                   Width="130" />
         <ComboBox ItemsSource="{Binding Source={StaticResource WoodValues}}"
                   Grid.Row="1"
-                  Grid.Column="5"
+                  Grid.Column="6"
                   SelectedIndex="{Binding BottomWoodComboBoxIndex}"
                   Margin="5, 5, 5, 0"
                   Width="130" />
         <TextBox Text="{Binding NumberOfStrings}"
                  Grid.Row="1"
-                 Grid.Column="6"
+                 Grid.Column="7"
+                 Name="NumberOfStrings"
                  HorizontalContentAlignment="Right"
                  Margin="5, 5, 5, 0" />
+        <ComboBox ItemsSource="{Binding Source={StaticResource StyleValues}}"
+                  Grid.Row="1"
+                  Grid.Column="7"
+                  Name="StyleValue"
+                  SelectedIndex="{Binding StyleComboBoxIndex}"
+                  Margin="5, 5, 5, 0"
+                  Visibility="Hidden"
+                  Width="Auto" />
         <TextBox Text="Results: "
                  Grid.Row="2"
                  Grid.Column="0"
@@ -125,7 +166,7 @@
                  Margin="0, 5, 0, 0" />
         <TextBox Grid.Row="2"
                  Grid.Column="1"
-                 Grid.ColumnSpan="5"
+                 Grid.ColumnSpan="7"
                  Text="{Binding ResultsTextBox}"
                  Margin="0, 5, 0, 0"
                  BorderBrush="Black"

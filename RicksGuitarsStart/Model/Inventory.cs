@@ -16,10 +16,10 @@ namespace RicksGuitarsStart.Model
             get
             {
                 List<string> models = new List<string>();
-                foreach (Guitar guitar in instruments)
+                foreach (Instrument instrument in instruments)
                 {
-                    if (!models.Contains(guitar.Specification.Model))
-                        models.Add(guitar.Specification.Model);
+                    if (!models.Contains(instrument.Specification.Model))
+                        models.Add(instrument.Specification.Model);
                 }
                 models.Sort();
                 return models;
@@ -61,6 +61,7 @@ namespace RicksGuitarsStart.Model
                                 Wood.Cocobolo, Wood.Cedar)));
             Add(new Guitar("6 29584", 2100.95m, new GuitarSpecification(Builder.PRS, "Dave Navarro Signature",
                                 Category.Electric, 6, Wood.Mahogany, Wood.Maple)));
+            Add(new Mandolin("9019920", 5495.99m, new MandolinSpecification(Builder.Gibson, "F-5G", Category.Acoustic, Wood.Maple, Wood.Maple, Style.F)));
         }
 
         /// <summary>
@@ -97,12 +98,11 @@ namespace RicksGuitarsStart.Model
                 throw new ArgumentNullException(nameof(searchGuitarSpecification));
 
             List<Guitar> foundGuitars = new List<Guitar>();
-            foreach (Guitar guitar in instruments)
+            foreach (Instrument instrument in instruments)
             {
-                if (searchGuitarSpecification == guitar.Specification)
+                if (instrument is Guitar guitar &&  searchGuitarSpecification == guitar.Specification)
                     foundGuitars.Add(guitar);
             }
-
             return foundGuitars;
         }
 
@@ -112,12 +112,11 @@ namespace RicksGuitarsStart.Model
                 throw new ArgumentNullException(nameof(searchMandolinSpecification));
 
             List<Mandolin> foundMandolins = new List<Mandolin>();
-            foreach (Mandolin mandolin in instruments)
+            foreach (Instrument instrument in instruments)
             {
-                if (searchMandolinSpecification == mandolin.Specification)
+                if (instrument is Mandolin mandolin && searchMandolinSpecification == mandolin.Specification)
                     foundMandolins.Add(mandolin);
             }
-
             return foundMandolins;
         }
     }
