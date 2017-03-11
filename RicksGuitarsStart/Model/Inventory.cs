@@ -27,6 +27,22 @@ namespace RicksGuitarsStart.Model
             }
         }
 
+        public ICollection<string> InstrumentTypes
+        {
+            get
+            {
+                List<string> instrumentTypes = new List<string>();
+                foreach (Instrument instrument in instruments)
+                {
+                    string instrumentType = ((InstrumentType)instrument.Specification.GetProperty("InstrumentType")).ToString();
+                    if (!instrumentTypes.Contains(instrumentType))
+                        instrumentTypes.Add(instrumentType);
+                }
+                instrumentTypes.Sort();
+                return instrumentTypes;
+            }
+        }
+
         /// <summary>
         /// Initialize the inventory.
         /// </summary>

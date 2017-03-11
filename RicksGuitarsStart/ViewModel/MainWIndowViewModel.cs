@@ -20,8 +20,8 @@ namespace RicksGuitarsStart.ViewModel
         private ObservableCollection<string> _models;
         public ObservableCollection<string> Models { get => _models; }
 
-        private ObservableCollection<string> _instruments = new ObservableCollection<string>();
-        public ObservableCollection<string> Instruments { get => _instruments; }
+        private ObservableCollection<string> _instrumentTypes;
+        public ObservableCollection<string> Instruments { get => _instrumentTypes; }
 
         private string _modelComboBoxItem;
         public string ModelComboBoxItem
@@ -78,13 +78,13 @@ namespace RicksGuitarsStart.ViewModel
             }
         }
 
-        private int _bottomWoodComboBoxIndex;
-        public int BottomWoodComboBoxIndex
+        private int _backWoodComboBoxIndex;
+        public int BackWoodComboBoxIndex
         {
-            get { return _bottomWoodComboBoxIndex; }
+            get { return _backWoodComboBoxIndex; }
             set
             {
-                _bottomWoodComboBoxIndex = value;
+                _backWoodComboBoxIndex = value;
                 NotifyPropertyChanged();
             }
         }
@@ -121,6 +121,94 @@ namespace RicksGuitarsStart.ViewModel
                 NotifyPropertyChanged();
             }
         }
+
+        private bool _instrumentCheckBoxIsChecked;
+        public bool InstrumentCheckBoxIsChecked
+        {
+            get { return _instrumentCheckBoxIsChecked; }
+            set
+            {
+                _instrumentCheckBoxIsChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _builderCheckBoxIsChecked;
+        public bool BuilderCheckBoxIsChecked
+        {
+            get { return _builderCheckBoxIsChecked; }
+            set
+            {
+                _builderCheckBoxIsChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _modelCheckBoxIsChecked;
+        public bool ModelCheckBoxIsChecked
+        {
+            get { return _modelCheckBoxIsChecked; }
+            set
+            {
+                _modelCheckBoxIsChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _categoryCheckBoxIsChecked;
+        public bool CategoryCheckBoxIsChecked
+        {
+            get { return _categoryCheckBoxIsChecked; }
+            set
+            {
+                _categoryCheckBoxIsChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _topWoodCheckBoxIsChecked;
+        public bool TopWoodCheckBoxIsChecked
+        {
+            get { return _topWoodCheckBoxIsChecked; }
+            set
+            {
+                _topWoodCheckBoxIsChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _backWoodCheckBoxIsChecked;
+        public bool BackWoodCheckBoxIsChecked
+        {
+            get { return _backWoodCheckBoxIsChecked; }
+            set
+            {
+                _backWoodCheckBoxIsChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _numberOfStringsCheckBoxIsChecked;
+        public bool NumberOfStringsCheckBoxIsChecked
+        {
+            get { return _numberOfStringsCheckBoxIsChecked; }
+            set
+            {
+                _numberOfStringsCheckBoxIsChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _styleCheckBoxIsChecked;
+        public bool StyleCheckBoxIsChecked
+        {
+            get { return _styleCheckBoxIsChecked; }
+            set
+            {
+                _styleCheckBoxIsChecked = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         public MainWIndowViewModel()
@@ -131,10 +219,8 @@ namespace RicksGuitarsStart.ViewModel
             inventory.Initialize();
             _models = new ObservableCollection<string>(inventory.Models);
             _modelComboBoxItem = _models[0];
-            _instruments.Add("Guitar");
-            _instruments.Add("Mandolin");
-            _instrumentCombBoxItem = _instruments[0];
-
+            _instrumentTypes = new ObservableCollection<string>(inventory.InstrumentTypes);
+            _instrumentCombBoxItem = _instrumentTypes[0];
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -152,28 +238,25 @@ namespace RicksGuitarsStart.ViewModel
         /// </summary>
         internal void Search()
         {
-            Dictionary<string, object> properties = new Dictionary<string, object>
-            {
-                { "InstrumentType", (InstrumentType)Enum.Parse(typeof(InstrumentType), InstrumentCombBoxItem.ToString())},
-                { "Builder", (Builder)Enum.Parse(typeof(Builder), BuilderComboBoxIndex.ToString())},
-                { "Model", ModelComboBoxItem},
-                { "Category", (Category)Enum.Parse(typeof(Category), CategoryComboBoxIndex.ToString())},
-                { "TopWood", (Wood)Enum.Parse(typeof(Wood), TopWoodComboBoxIndex.ToString())},
-                { "BackWood", (Wood)Enum.Parse(typeof(Wood), BottomWoodComboBoxIndex.ToString())}
-            };
-
-            switch (InstrumentCombBoxItem)
-            {
-                case "Guitar":
-                    properties["NumberOfStrings"] = NumberOfStrings;
-                    break;
-                case "Mandolin":
-                    properties["Style"] = (Style)Enum.Parse(typeof(Style), StyleComboBoxIndex.ToString());
-                    break;
-                default:
-                    Debug.Fail("Unexpected instrument found");
-                    break;
-            }
+            Dictionary<string, object> properties = new Dictionary<string, object>();
+            if (InstrumentCheckBoxIsChecked)
+                properties["InstrumentType"] = (InstrumentType)Enum.Parse(typeof(InstrumentType), InstrumentCombBoxItem.ToString());
+            if (BuilderCheckBoxIsChecked)
+                properties["Builder"] = (Builder)Enum.Parse(typeof(Builder), BuilderComboBoxIndex.ToString());
+            if (ModelCheckBoxIsChecked)
+                properties["Model"] = ModelComboBoxItem;
+            if (CategoryCheckBoxIsChecked)
+                properties["Category"] = (Category)Enum.Parse(typeof(Category), CategoryComboBoxIndex.ToString());
+            if (TopWoodCheckBoxIsChecked)
+                properties["TopWood"] = (Wood)Enum.Parse(typeof(Wood), TopWoodComboBoxIndex.ToString());
+            if (BackWoodCheckBoxIsChecked)
+                properties["BackWood"] = (Wood)Enum.Parse(typeof(Wood), BackWoodComboBoxIndex.ToString());
+            if (NumberOfStringsCheckBoxIsChecked)
+                properties["NumberOfStrings"] = NumberOfStrings;
+            if (TopWoodCheckBoxIsChecked)
+                properties["TopWood"] = (Wood)Enum.Parse(typeof(Wood), TopWoodComboBoxIndex.ToString());
+            if (StyleCheckBoxIsChecked)
+                properties["Style"] = (Style)Enum.Parse(typeof(Style), StyleComboBoxIndex.ToString());
 
             ICollection<Instrument> instruments = inventory.Search(new InstrumentSpecification(properties));
             ResultsTextBox = "";
@@ -185,7 +268,7 @@ namespace RicksGuitarsStart.ViewModel
                 }
             }
             else
-                ResultsTextBox = $"No {properties["InstrumentType"]} found.";
+                ResultsTextBox = $"No instruments found.";
 
         }
 
