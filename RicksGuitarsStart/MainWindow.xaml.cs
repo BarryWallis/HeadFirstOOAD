@@ -41,7 +41,6 @@ namespace RicksGuitarsStart
             if (NumberOfStrings is null && StyleValue is null)
                 return;
 
-            string instrumentName = ((sender as ComboBox)?.SelectedItem as ComboBoxItem)?.Content as string;
             switch (InstrumentComboBox.SelectedItem as string)
             {
                 case "Guitar":

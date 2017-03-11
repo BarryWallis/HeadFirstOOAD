@@ -6,32 +6,46 @@ using System.Threading.Tasks;
 
 namespace RicksGuitarsStart.Model
 {
-    abstract public class InstrumentSpecification
+    public class InstrumentSpecification
     {
-        public Builder Builder { get; }
-        public string Model { get; }
-        public Category Category { get; }
-        public Wood TopWood { get; }
-        public Wood BackWood { get; }
+        private Dictionary<string, object> _properties;
+        public IDictionary<string, object> Properties => _properties;
 
-        protected InstrumentSpecification(Builder builder, string model, Category category, Wood topWood, Wood backWood)
+        public InstrumentSpecification(IDictionary<string, object> properties) 
+            => _properties = properties is null ? new Dictionary<string, object>() : new Dictionary<string, object>(properties);
+
+        /// <summary>
+        /// Check every property in the <paramref name="other"/> specification against the properties in the instance. 
+        /// </summary>
+        /// <param name="other">The properties to match on.</param>
+        /// <returns>True if all the properties in <paramref name="other"/> match proerties in the instance; otherwise false.</returns>
+        public bool Matches(InstrumentSpecification other)
         {
-            if (string.IsNullOrWhiteSpace(model))
-                throw new ArgumentNullException(nameof(model));
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
 
-            Builder = builder;
-            Model = model;
-            Category = category;
-            TopWood = topWood;
-            BackWood = backWood;
+            foreach (KeyValuePair<string, object> property in other.Properties)
+            {
+                if (!Properties.Contains(property))
+                    return false;
+            }
+            return true;
         }
+
+        /// <summary>
+        /// Return the value of the named property
+        /// </summary>
+        /// <param name="name">The name of the property.</param>
+        /// <returns>The value of the named property if it exists; otherwise null.</returns>
+        public object GetProperty(string name) => Properties.ContainsKey(name) ? Properties[name] : null;
 
         /// <summary>
         /// Check if two InstrumentSpecifications are equal.
         /// </summary>
         /// <param name="other">The second InstrumentSpecification to check for equality.</param>
-        /// <returns>True if the two InstrumentSpecifications are equal; otherwise false.</returns>
-        public bool Equals(InstrumentSpecification other) => other != null && Builder == other.Builder && Model == other.Model && Category == other.Category && TopWood == other.TopWood && BackWood == other.BackWood;
+        /// <returns>True if all of the properties in the two speciifcations match; otherwise false.</returns>
+        public bool Equals(InstrumentSpecification other) => other != null && Properties == other.Properties;
+       
 
         /// <summary>
         /// Check if the InstrumentSpecification is equal to the given object.
@@ -48,7 +62,7 @@ namespace RicksGuitarsStart.Model
         /// Return the hash code for the InstrumentSpecification.
         /// </summary>
         /// <returns>The hash code for the InstrumentSpecification.</returns>
-        public override int GetHashCode() => Tuple.Create(Builder, Model, Category, TopWood, BackWood).GetHashCode();
+        public override int GetHashCode() => Properties.GetHashCode();
 
         /// <summary>
         /// Check if two InstrumentSpecifications are equal.

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace RicksGuitarsStart.Model
 {
-    abstract public class Instrument : IEquatable<Instrument>
+    public class Instrument : IEquatable<Instrument>
     {
         public string SerialNumber { get; protected set; }
         public decimal Price { get; protected set; }
         public InstrumentSpecification Specification { get; protected set; }
 
-        protected Instrument(string serialNumber, decimal price, InstrumentSpecification specification)
+        public Instrument(string serialNumber, decimal price, InstrumentSpecification specification)
         {
             SerialNumber = serialNumber;
             Price = price;

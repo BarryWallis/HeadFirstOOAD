@@ -152,67 +152,55 @@ namespace RicksGuitarsStart.ViewModel
         /// </summary>
         internal void Search()
         {
+            Dictionary<string, object> properties = new Dictionary<string, object>
+            {
+                { "InstrumentType", (InstrumentType)Enum.Parse(typeof(InstrumentType), InstrumentCombBoxItem.ToString())},
+                { "Builder", (Builder)Enum.Parse(typeof(Builder), BuilderComboBoxIndex.ToString())},
+                { "Model", ModelComboBoxItem},
+                { "Category", (Category)Enum.Parse(typeof(Category), CategoryComboBoxIndex.ToString())},
+                { "TopWood", (Wood)Enum.Parse(typeof(Wood), TopWoodComboBoxIndex.ToString())},
+                { "BackWood", (Wood)Enum.Parse(typeof(Wood), BottomWoodComboBoxIndex.ToString())}
+            };
+
             switch (InstrumentCombBoxItem)
             {
                 case "Guitar":
-                    ICollection<Guitar> guitars = inventory.Search(new GuitarSpecification((Builder)BuilderComboBoxIndex, ModelComboBoxItem, (Category)CategoryComboBoxIndex, NumberOfStrings, (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex));
-                    if (guitars.Count > 0)
-                    {
-                        ResultsTextBox = "";
-                        foreach (Guitar guitar in guitars)
-                        {
-                            AddGuitarToTextBox(guitar);
-                        }
-                    }
-                    else
-                        ResultsTextBox = "No guitars found.";
+                    properties["NumberOfStrings"] = NumberOfStrings;
                     break;
                 case "Mandolin":
-                    ICollection<Mandolin> mandolins = inventory.Search(new MandolinSpecification((Builder)BuilderComboBoxIndex, ModelComboBoxItem, (Category)CategoryComboBoxIndex, (Wood)TopWoodComboBoxIndex, (Wood)BottomWoodComboBoxIndex, (Style)StyleComboBoxIndex));
-                    if (mandolins.Count > 0)
-                    {
-                        ResultsTextBox = "";
-                        foreach (Mandolin mandolin in mandolins)
-                        {
-                            AddMandolinToTextBox(mandolin);
-                        }
-                    }
-                    else
-                        ResultsTextBox = "No mandolins found.";
+                    properties["Style"] = (Style)Enum.Parse(typeof(Style), StyleComboBoxIndex.ToString());
                     break;
                 default:
                     Debug.Fail("Unexpected instrument found");
                     break;
             }
+
+            ICollection<Instrument> instruments = inventory.Search(new InstrumentSpecification(properties));
+            ResultsTextBox = "";
+            if (instruments.Count > 0)
+            {
+                foreach (Instrument instrument in instruments)
+                {
+                    AddInstrumentToTextBox(instrument);
+                }
+            }
+            else
+                ResultsTextBox = $"No {properties["InstrumentType"]} found.";
+
         }
 
         /// <summary>
-        /// Add guitar info to ResultsTextBox.
+        /// Add instrument info to ResultsTextBox.
         /// </summary>
-        /// <param name="guitar"></param>
-        private void AddGuitarToTextBox(Guitar guitar)
+        /// <param name="instrument">The instrument to add to the text box.</param>
+        private void AddInstrumentToTextBox(Instrument instrument)
         {
-            ResultsTextBox += $"{guitar.SerialNumber} is {guitar.Price:C}\n";
-            ResultsTextBox += $"\tBuilder: {guitar.Specification.Builder}\n";
-            ResultsTextBox += $"\tModel: { guitar.Specification.Model}\n";
-            ResultsTextBox += $"\tCategory: { guitar.Specification.Category}\n";
-            ResultsTextBox += $"\tTop Wood: { guitar.Specification.TopWood}\n";
-            ResultsTextBox += $"\tBack Wood: {guitar.Specification.BackWood}\n";
+            ResultsTextBox += $"{instrument.SerialNumber} is {instrument.Price}";
+            foreach (KeyValuePair<string, object> property in instrument.Specification.Properties)
+            {
+                ResultsTextBox += $"\t{property.Key}: {property.Value}\n";
+            }
         }
 
-        /// <summary>
-        /// Add mandolin info to ResultsTextBox.
-        /// </summary>
-        /// <param name="mandolin"></param>
-        private void AddMandolinToTextBox(Mandolin mandolin)
-        {
-            ResultsTextBox += $"{mandolin.SerialNumber} is {mandolin.Price:C}\n";
-            ResultsTextBox += $"\tBuilder: {mandolin.Specification.Builder}\n";
-            ResultsTextBox += $"\tModel: { mandolin.Specification.Model}\n";
-            ResultsTextBox += $"\tCategory: { mandolin.Specification.Category}\n";
-            ResultsTextBox += $"\tTop Wood: { mandolin.Specification.TopWood}\n";
-            ResultsTextBox += $"\tBack Wood: {mandolin.Specification.BackWood}\n";
-            ResultsTextBox += $"\tStyle: {mandolin.Specification.Style}\n";
-        }
     }
 }

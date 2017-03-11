@@ -18,20 +18,13 @@ namespace RicksGuitarsStart.Model
                 List<string> models = new List<string>();
                 foreach (Instrument instrument in instruments)
                 {
-                    if (!models.Contains(instrument.Specification.Model))
-                        models.Add(instrument.Specification.Model);
+                    string model = instrument.Specification.GetProperty("Model") as string;
+                    if (!models.Contains(model))
+                        models.Add(model);
                 }
                 models.Sort();
                 return models;
             }
-        }
-
-       /// <summary>
-        /// Create a new instance of Inventory.
-        /// </summary>
-        public Inventory()
-        {
-
         }
 
         /// <summary>
@@ -39,85 +32,88 @@ namespace RicksGuitarsStart.Model
         /// </summary>
         public void Initialize()
         {
-            Add(new Guitar("11277", 3999.95m, new GuitarSpecification(Builder.Collings, "CJ", Category.Acoustic, 6, 
-                                Wood.IndianRosewood, Wood.Sitka)));
-            Add(new Guitar("V95693", 1499.95m, new GuitarSpecification(Builder.Fender, "Stratocastor", Category.Electric, 12, 
-                                Wood.Alder, Wood.Alder)));
-            Add(new Guitar("V9512", 1549.95m, new GuitarSpecification(Builder.Fender, "Stratocastor", Category.Electric, 6, 
-                                Wood.Alder, Wood.Alder)));
-            Add(new Guitar("122784", 5495.95m, new GuitarSpecification(Builder.Martin, "D-18", Category.Acoustic, 6, 
-                                Wood.Mahogany, Wood.Adirondack)));
-            Add(new Guitar("76531", 295.95m, new GuitarSpecification(Builder.Martin, "OM-28", Category.Acoustic, 6, 
-                                Wood.BrazilianRosewood, Wood.Adirondack)));
-            Add(new Guitar("70108276", 2295.95m, new GuitarSpecification(Builder.Gibson, "Les Paul", Category.Electric, 6,
-                                Wood.Mahogany, Wood.Maple)));
-            Add(new Guitar("82765501", 1890.95m, new GuitarSpecification(Builder.Gibson, "SG '61 Reissue",
-                                Category.Electric, 6, Wood.Mahogany, Wood.Mahogany)));
-            Add(new Guitar("77023", 275.95m, new GuitarSpecification(Builder.Martin, "D-28", Category.Acoustic, 6,
-                                Wood.BrazilianRosewood, Wood.Adirondack)));
-            Add(new Guitar("1092", 12995.95m, new GuitarSpecification(Builder.Olson, "SJ", Category.Acoustic, 6,
-                                Wood.IndianRosewood, Wood.Cedar)));
-            Add(new Guitar("566-62", 8999.95m, new GuitarSpecification(Builder.Ryan, "Cathedral", Category.Acoustic, 6,
-                                Wood.Cocobolo, Wood.Cedar)));
-            Add(new Guitar("6 29584", 2100.95m, new GuitarSpecification(Builder.PRS, "Dave Navarro Signature",
-                                Category.Electric, 6, Wood.Mahogany, Wood.Maple)));
-            Add(new Mandolin("9019920", 5495.99m, new MandolinSpecification(Builder.Gibson, "F-5G", Category.Acoustic, Wood.Maple, Wood.Maple, Style.F)));
+            Dictionary<string, object> properties = new Dictionary<string, object>
+            {
+                { "InstrumentType", InstrumentType.Guitar },
+                { "Builder", Builder.Collings },
+                { "Model", "CJ" },
+                { "Category", Category.Acoustic },
+                { "NumberOfStrings", 6 },
+                { "TopWood", Wood.IndianRosewood },
+                { "BackWood", Wood.Sitka }
+            };
+            Add(new Instrument("11277", 3999.95m, new InstrumentSpecification(properties)));
+
+            properties["Builder"] = Builder.Martin;
+            properties["Model"] = "D-18";
+            properties["TopWood"] = Wood.Mahogany;
+            properties["BackWood"] = Wood.Adirondack;
+            Add(new Instrument("122784", 5495.95m, new InstrumentSpecification(properties)));
+
+            properties["Builder"] = Builder.Fender;
+            properties["Model"] = "Stratocastor";
+            properties["Category"] = Category.Electric;
+            properties["TopWood"] = Wood.Alder;
+            properties["BackWood"] = Wood.Alder;
+            Add(new Instrument("V95693", 1499.95m, new InstrumentSpecification(properties)));
+            Add(new Instrument("V9512", 1549.95m, new InstrumentSpecification(properties)));
+
+            properties["Builder"] = Builder.Gibson;
+            properties["Model"] = "Les Paul";
+            properties["TopWood"] = Wood.Maple;
+            properties["BackWood"] = Wood.Maple;
+            Add(new Instrument("70108276", 2295.95m, new InstrumentSpecification(properties)));
+
+            properties["Model"] = "SG '61 Reissue";
+            properties["TopWood"] = Wood.Mahogany;
+            properties["BackWood"] = Wood.Mahogany;
+            Add(new Instrument("82765501", 1890.95m, new InstrumentSpecification(properties)));
+
+            properties["InstrumentType"] = InstrumentType.Mandolin;
+            properties["Category"] = Category.Acoustic;
+            properties["Model"] = "F-5G";
+            properties["BackWood"] = Wood.Maple;
+            properties["TopWood"] = Wood.Maple;
+            properties.Remove("NumberOfStrings");
+            properties["Style"] = Style.F;
+            Add(new Instrument("9019920", 5495.99m, new InstrumentSpecification(properties)));
+
+            properties["InstrumentType"] = InstrumentType.Banjo;
+            properties["Model"] = "RB-3 Wreath";
+            properties.Remove("TopWood");
+            properties["NumberOfStrings"] = 5;
+            properties.Remove("Style");
+            Add(new Instrument("8900231", 2945.95m, new InstrumentSpecification(properties)));
         }
 
         /// <summary>
-        /// Add a Guitar to the inventory.
+        /// Add an Instrument to the inventory.
         /// </summary>
-        /// <param name="guitar">The Guitar to add to the inventory.</param>
+        /// <param name="InstrumentType">The Instrument to add to the inventory.</param>
         public void Add(Instrument instrument)
         {
             if (instrument is null)
                 throw new ArgumentNullException(nameof(instrument));
-
-            switch (instrument)
-            {
-                case Guitar guitar:
-                    instruments.Add(guitar);
-                    break;
-                case Mandolin mandolin:
-                    instruments.Add(mandolin);
-                    break;
-                default:
-                    Debug.Fail("Unexpected instrument");
-                    break;
-            }
+            instruments.Add(instrument);
         }
 
         /// <summary>
-        /// Search for a Guitar like the one given as a parameter.
+        /// Search for an Instrument like the one given as a parameter.
         /// </summary>
         /// <param name="searchGuitar">The Guitar to searcvh for.</param>
         /// <returns>A collection of all the guitars that match the criteria.</returns>
-        public ICollection<Guitar> Search(GuitarSpecification searchGuitarSpecification)
+        public ICollection<Instrument> Search(InstrumentSpecification searchSpecification)
         {
-            if (searchGuitarSpecification is null)
-                throw new ArgumentNullException(nameof(searchGuitarSpecification));
+            if (searchSpecification is null)
+                throw new ArgumentNullException(nameof(searchSpecification));
 
-            List<Guitar> foundGuitars = new List<Guitar>();
+            List<Instrument> foundInstruments = new List<Instrument>();
             foreach (Instrument instrument in instruments)
             {
-                if (instrument is Guitar guitar &&  searchGuitarSpecification == guitar.Specification)
-                    foundGuitars.Add(guitar);
+                if (instrument.Specification.Matches(searchSpecification))
+                    foundInstruments.Add(instrument);
             }
-            return foundGuitars;
-        }
-
-        public ICollection<Mandolin> Search(MandolinSpecification searchMandolinSpecification)
-        {
-            if (searchMandolinSpecification is null)
-                throw new ArgumentNullException(nameof(searchMandolinSpecification));
-
-            List<Mandolin> foundMandolins = new List<Mandolin>();
-            foreach (Instrument instrument in instruments)
-            {
-                if (instrument is Mandolin mandolin && searchMandolinSpecification == mandolin.Specification)
-                    foundMandolins.Add(mandolin);
-            }
-            return foundMandolins;
+            return foundInstruments;
         }
     }
 }
