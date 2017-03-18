@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26206.0
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RicksGuitarsStart", "RicksGuitarsStart\RicksGuitarsStart.csproj", "{906A55DA-7C57-4327-9B9F-5C6813F1FB0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DougsDogDoors", "DougsDogDoors\DougsDogDoors.csproj", "{4353D758-9035-48CB-AE09-BA98FFB8D4A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSystemFramework", "GameSystemFramework\GameSystemFramework\GameSystemFramework.csproj", "{30BE714E-EBCD-496E-A59B-BE7576D13B80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSystemFrameworkTests", "GameSystemFrameworkTests\GameSystemFrameworkTests.csproj", "{5D036AAE-63C3-45EC-984A-737D7A0FBE83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{82847F1C-8363-41E8-948C-E318A7637D5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{4353D758-9035-48CB-AE09-BA98FFB8D4A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4353D758-9035-48CB-AE09-BA98FFB8D4A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4353D758-9035-48CB-AE09-BA98FFB8D4A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30BE714E-EBCD-496E-A59B-BE7576D13B80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30BE714E-EBCD-496E-A59B-BE7576D13B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30BE714E-EBCD-496E-A59B-BE7576D13B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30BE714E-EBCD-496E-A59B-BE7576D13B80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D036AAE-63C3-45EC-984A-737D7A0FBE83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D036AAE-63C3-45EC-984A-737D7A0FBE83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D036AAE-63C3-45EC-984A-737D7A0FBE83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D036AAE-63C3-45EC-984A-737D7A0FBE83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82847F1C-8363-41E8-948C-E318A7637D5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82847F1C-8363-41E8-948C-E318A7637D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82847F1C-8363-41E8-948C-E318A7637D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82847F1C-8363-41E8-948C-E318A7637D5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
