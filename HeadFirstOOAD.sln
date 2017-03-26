@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSystemFrameworkTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{82847F1C-8363-41E8-948C-E318A7637D5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouteFinderLibrary", "RouteFinder\RouteFinderLibrary\RouteFinderLibrary.csproj", "{FF096C17-133B-4E2F-B0CF-ACF2DC4F236A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouteFinderLibraryTests", "RouteFinderLibraryTests\RouteFinderLibraryTests.csproj", "{A02D12F7-D497-45B5-ADAA-0B10FD72BA0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{82847F1C-8363-41E8-948C-E318A7637D5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82847F1C-8363-41E8-948C-E318A7637D5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82847F1C-8363-41E8-948C-E318A7637D5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF096C17-133B-4E2F-B0CF-ACF2DC4F236A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF096C17-133B-4E2F-B0CF-ACF2DC4F236A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF096C17-133B-4E2F-B0CF-ACF2DC4F236A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF096C17-133B-4E2F-B0CF-ACF2DC4F236A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A02D12F7-D497-45B5-ADAA-0B10FD72BA0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A02D12F7-D497-45B5-ADAA-0B10FD72BA0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A02D12F7-D497-45B5-ADAA-0B10FD72BA0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A02D12F7-D497-45B5-ADAA-0B10FD72BA0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

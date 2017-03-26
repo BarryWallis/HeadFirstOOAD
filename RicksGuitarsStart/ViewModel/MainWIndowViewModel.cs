@@ -26,8 +26,7 @@ namespace RicksGuitarsStart.ViewModel
         private string _modelComboBoxItem;
         public string ModelComboBoxItem
         {
-            get { return _modelComboBoxItem; }
-            set
+            get => _modelComboBoxItem; set
             {
                 _modelComboBoxItem = value;
                 NotifyPropertyChanged();
@@ -37,8 +36,7 @@ namespace RicksGuitarsStart.ViewModel
         private string _resultsTextBox;
         public string ResultsTextBox
         {
-            get { return _resultsTextBox; }
-            set
+            get => _resultsTextBox; set
             {
                 _resultsTextBox = value;
                 NotifyPropertyChanged();
@@ -48,8 +46,7 @@ namespace RicksGuitarsStart.ViewModel
         private int _builderComboBoxIndex;
         public int BuilderComboBoxIndex
         {
-            get { return _builderComboBoxIndex; }
-            set
+            get => _builderComboBoxIndex; set
             {
                 _builderComboBoxIndex = value;
                 NotifyPropertyChanged();
@@ -59,8 +56,7 @@ namespace RicksGuitarsStart.ViewModel
         private int _categoryComboBoxIndex;
         public int CategoryComboBoxIndex
         {
-            get { return _categoryComboBoxIndex; }
-            set
+            get => _categoryComboBoxIndex; set
             {
                 _categoryComboBoxIndex = value;
                 NotifyPropertyChanged();
@@ -70,8 +66,7 @@ namespace RicksGuitarsStart.ViewModel
         private int _topWoodComboBoxIndex;
         public int TopWoodComboBoxIndex
         {
-            get { return _topWoodComboBoxIndex; }
-            set
+            get => _topWoodComboBoxIndex; set
             {
                 _topWoodComboBoxIndex = value;
                 NotifyPropertyChanged();
@@ -81,8 +76,7 @@ namespace RicksGuitarsStart.ViewModel
         private int _backWoodComboBoxIndex;
         public int BackWoodComboBoxIndex
         {
-            get { return _backWoodComboBoxIndex; }
-            set
+            get => _backWoodComboBoxIndex; set
             {
                 _backWoodComboBoxIndex = value;
                 NotifyPropertyChanged();
@@ -92,8 +86,7 @@ namespace RicksGuitarsStart.ViewModel
         private int _numberOfStrings = 6;
         public int NumberOfStrings
         {
-            get { return _numberOfStrings; }
-            set
+            get => _numberOfStrings; set
             {
                 _numberOfStrings = value;
                 NotifyPropertyChanged();
@@ -103,8 +96,7 @@ namespace RicksGuitarsStart.ViewModel
         private int _styleComboBoxIndex = 0;
         public int StyleComboBoxIndex
         {
-            get { return _styleComboBoxIndex; }
-            set
+            get => _styleComboBoxIndex; set
             {
                 _styleComboBoxIndex = value;
                 NotifyPropertyChanged();
@@ -114,8 +106,7 @@ namespace RicksGuitarsStart.ViewModel
         private string _instrumentCombBoxItem;
         public string InstrumentCombBoxItem
         {
-            get { return _instrumentCombBoxItem; }
-            set
+            get => _instrumentCombBoxItem; set
             {
                 _instrumentCombBoxItem = value;
                 NotifyPropertyChanged();
@@ -125,8 +116,7 @@ namespace RicksGuitarsStart.ViewModel
         private bool _instrumentCheckBoxIsChecked;
         public bool InstrumentCheckBoxIsChecked
         {
-            get { return _instrumentCheckBoxIsChecked; }
-            set
+            get => _instrumentCheckBoxIsChecked; set
             {
                 _instrumentCheckBoxIsChecked = value;
                 NotifyPropertyChanged();
@@ -136,8 +126,7 @@ namespace RicksGuitarsStart.ViewModel
         private bool _builderCheckBoxIsChecked;
         public bool BuilderCheckBoxIsChecked
         {
-            get { return _builderCheckBoxIsChecked; }
-            set
+            get => _builderCheckBoxIsChecked; set
             {
                 _builderCheckBoxIsChecked = value;
                 NotifyPropertyChanged();
@@ -147,8 +136,7 @@ namespace RicksGuitarsStart.ViewModel
         private bool _modelCheckBoxIsChecked;
         public bool ModelCheckBoxIsChecked
         {
-            get { return _modelCheckBoxIsChecked; }
-            set
+            get => _modelCheckBoxIsChecked; set
             {
                 _modelCheckBoxIsChecked = value;
                 NotifyPropertyChanged();
@@ -158,8 +146,7 @@ namespace RicksGuitarsStart.ViewModel
         private bool _categoryCheckBoxIsChecked;
         public bool CategoryCheckBoxIsChecked
         {
-            get { return _categoryCheckBoxIsChecked; }
-            set
+            get => _categoryCheckBoxIsChecked; set
             {
                 _categoryCheckBoxIsChecked = value;
                 NotifyPropertyChanged();
@@ -169,8 +156,7 @@ namespace RicksGuitarsStart.ViewModel
         private bool _topWoodCheckBoxIsChecked;
         public bool TopWoodCheckBoxIsChecked
         {
-            get { return _topWoodCheckBoxIsChecked; }
-            set
+            get => _topWoodCheckBoxIsChecked; set
             {
                 _topWoodCheckBoxIsChecked = value;
                 NotifyPropertyChanged();
@@ -180,8 +166,7 @@ namespace RicksGuitarsStart.ViewModel
         private bool _backWoodCheckBoxIsChecked;
         public bool BackWoodCheckBoxIsChecked
         {
-            get { return _backWoodCheckBoxIsChecked; }
-            set
+            get => _backWoodCheckBoxIsChecked; set
             {
                 _backWoodCheckBoxIsChecked = value;
                 NotifyPropertyChanged();
@@ -191,8 +176,7 @@ namespace RicksGuitarsStart.ViewModel
         private bool _numberOfStringsCheckBoxIsChecked;
         public bool NumberOfStringsCheckBoxIsChecked
         {
-            get { return _numberOfStringsCheckBoxIsChecked; }
-            set
+            get => _numberOfStringsCheckBoxIsChecked; set
             {
                 _numberOfStringsCheckBoxIsChecked = value;
                 NotifyPropertyChanged();
@@ -202,8 +186,7 @@ namespace RicksGuitarsStart.ViewModel
         private bool _styleCheckBoxIsChecked;
         public bool StyleCheckBoxIsChecked
         {
-            get { return _styleCheckBoxIsChecked; }
-            set
+            get => _styleCheckBoxIsChecked; set
             {
                 _styleCheckBoxIsChecked = value;
                 NotifyPropertyChanged();
@@ -228,10 +211,7 @@ namespace RicksGuitarsStart.ViewModel
         // This method is called by the Set accessor of each property. 
         // The CallerMemberName attribute that is applied to the optional propertyName 
         // parameter causes the property name of the caller to be substituted as an argument. 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         /// <summary>
         /// Search for the given instrument and populate the ResultsTextBox.
