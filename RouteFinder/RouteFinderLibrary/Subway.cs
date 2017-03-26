@@ -70,6 +70,32 @@ namespace RouteFinderLibrary
             connections.Add(new Connection(station2, station1, lineName));
         }
 
+        /// <summary>
+        /// Check if the Subway has the given connection between <paramref name="station1Name"/> and <paramref name="station2Name"/> on <paramref name="lineName"/>.
+        /// </summary>
+        /// <param name="station1Name">The first Station name.</param>
+        /// <param name="station2Name">The other Station name.</param>
+        /// <param name="lineName">The Subway line name.</param>
+        /// <returns>true if the Subway has the givven connection; otherwise false.</returns>
+        public bool HasConnection(string station1Name, string station2Name, string lineName)
+        {
+            if (string.IsNullOrWhiteSpace(station1Name))
+                throw new ArgumentNullException(nameof(station1Name));
+            if (string.IsNullOrWhiteSpace(station2Name))
+                throw new ArgumentNullException(nameof(station2Name));
+            if (string.IsNullOrWhiteSpace(lineName))
+                throw new ArgumentNullException(nameof(lineName));
+            Debug.Assert(connections != null);
+
+            Connection checkConnection = new Connection(new Station(station1Name), new Station(station2Name), lineName);
+            foreach (Connection connection in connections)
+            {
+                if (connection == checkConnection)
+                    return true;
+            }
+            return false;
+        }
+
         public ICollection<Station> GetStations() => stations.ToArray();
 
         public ICollection<Connection> GetConnections() => connections.ToArray();

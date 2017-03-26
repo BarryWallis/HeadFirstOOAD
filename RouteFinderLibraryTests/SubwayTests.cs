@@ -131,5 +131,64 @@ namespace RouteFinderLibraryTests
             subway.AddConnection(station1, station2, "line");
             Assert.Fail();
         }
+
+        [TestMethod]
+        public void HasConnectionTrueStringStringString()
+        {
+            Subway subway = new Subway();
+            const string lineName = "Rock Island Line";
+            const string station1 = "Station 1";
+            subway.AddStation(station1);
+            const string station2 = "Station 2";
+            subway.AddStation(station2);
+            subway.AddConnection(station1, station2, lineName);
+            Assert.IsTrue(subway.HasConnection(station1, station2, lineName));
+        }
+
+        [TestMethod]
+        public void HasConnectionFalseStringStringString()
+        {
+            Subway subway = new Subway();
+            const string lineName = "Rock Island Line";
+            const string station1 = "Station 1";
+            subway.AddStation(station1);
+            const string station2 = "Station 2";
+            subway.AddStation(station2);
+            subway.AddConnection(station1, station2, lineName);
+            Assert.IsFalse(subway.HasConnection("x", station2, lineName));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void HasConnectionNullStringString()
+        {
+            Subway subway = new Subway();
+            const string lineName = "Rock Island Line";
+            const string station2 = "Station 2";
+            subway.HasConnection(null, station2, lineName);
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void HasConnectionStringNullString()
+        {
+            Subway subway = new Subway();
+            const string lineName = "Rock Island Line";
+            const string station1 = "Station 1";
+            subway.HasConnection(station1, null, lineName);
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void HasConnectionStringStringNull()
+        {
+            Subway subway = new Subway();
+            const string station1 = "Station 1";
+            const string station2 = "Station 2";
+            subway.HasConnection(station1, station2, null);
+            Assert.Fail();
+        }
     }
 }

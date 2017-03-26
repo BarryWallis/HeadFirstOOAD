@@ -51,6 +51,7 @@
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="StationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubwayLoaderTests.cs" />
     <Compile Include="SubwayTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +62,12 @@
       <Project>{ff096c17-133b-4e2f-b0cf-acf2dc4f236a}</Project>
       <Name>RouteFinderLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TestFiles\ObectvilleSubway.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
